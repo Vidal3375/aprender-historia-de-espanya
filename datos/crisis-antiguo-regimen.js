@@ -11,8 +11,9 @@
 
    Temas posibles: "cronologia", "personajes", "conceptos", "causas".
    Niveles: "basico", "normal", "extremo".
-   "fuente": de dónde sale el dato (Resumen de los Temas 1-5 del proyecto,
-   que indica el tema y las diapositivas de los apuntes originales).
+   "fuente": de dónde sale el dato. Fuentes del proyecto:
+     · Resumen de los Temas 1-5 (indica tema y diapositivas de los apuntes).
+     · Vocabulario de Historia de España, hoja «Hasta 1833».
    ===================================================================== */
 
 window.ACTIVIDADES = window.ACTIVIDADES || {};
@@ -306,6 +307,7 @@ window.ACTIVIDADES["crisis-antiguo-regimen"] = {
       fuente: "Tema 5, diap. 56–70"
     },
 
+
     /* ==================== PERSONAJES ==================== */
     {
       tema: "personajes", nivel: "basico",
@@ -516,6 +518,7 @@ window.ACTIVIDADES["crisis-antiguo-regimen"] = {
       fuente: "Tema 3, diap. 26–31 y 45"
     },
 
+
     /* ==================== CONCEPTOS Y DOCUMENTOS ==================== */
     {
       tema: "conceptos", nivel: "basico",
@@ -531,7 +534,7 @@ window.ACTIVIDADES["crisis-antiguo-regimen"] = {
       correcta: "En la nación",
       incorrectas: ["En el rey, por derecho divino", "En la nobleza y el clero", "En el emperador de los franceses"],
       explicacion: "Es la soberanía nacional: el poder reside en la nación, representada en Cortes, y no en el rey.",
-      fuente: "Tema 4, diap. 16–34"
+      fuente: "Tema 4, diap. 16–34; Vocabulario (hasta 1833): Soberanía, Soberanía Nacional"
     },
     {
       tema: "conceptos", nivel: "basico",
@@ -539,7 +542,7 @@ window.ACTIVIDADES["crisis-antiguo-regimen"] = {
       correcta: "Un español que colaboró con José I",
       incorrectas: ["Un soldado francés destinado en España", "Un liberal diputado en Cádiz", "Un guerrillero que luchaba contra Napoleón"],
       explicacion: "Colaboraban por convicción reformista o por interés. Muchos tuvieron que exiliarse en 1814.",
-      fuente: "Tema 3, diap. 32–36 y 62–65"
+      fuente: "Tema 3, diap. 32–36 y 62–65; Vocabulario (hasta 1833): Afrancesados"
     },
     {
       tema: "conceptos", nivel: "basico",
@@ -547,7 +550,7 @@ window.ACTIVIDADES["crisis-antiguo-regimen"] = {
       correcta: "Una guerra de desgaste apoyada por la población",
       incorrectas: ["Un ejército regular enviado por Inglaterra", "Una sociedad secreta de liberales", "La policía secreta de Fernando VII"],
       explicacion: "Interceptaban convoyes, atacaban destacamentos y cortaban comunicaciones. Líderes: Espoz y Mina, el Empecinado, Díaz Porlier.",
-      fuente: "Tema 3, diap. 46–56"
+      fuente: "Tema 3, diap. 46–56; Vocabulario (hasta 1833): Guerrilla"
     },
     {
       tema: "conceptos", nivel: "basico",
@@ -563,7 +566,7 @@ window.ACTIVIDADES["crisis-antiguo-regimen"] = {
       correcta: "Órganos de poder creados espontáneamente ante el vacío de poder",
       incorrectas: ["Tribunales de la Inquisición", "Consejos nombrados por José I", "Reuniones secretas del partido fernandino"],
       explicacion: "Surgieron de abajo arriba: juntas locales, provinciales y la Junta Suprema Central.",
-      fuente: "Tema 3, diap. 26–31"
+      fuente: "Tema 3, diap. 26–31; Vocabulario (hasta 1833): Juntas"
     },
     {
       tema: "conceptos", nivel: "basico",
@@ -571,7 +574,7 @@ window.ACTIVIDADES["crisis-antiguo-regimen"] = {
       correcta: "Los diputados absolutistas",
       incorrectas: ["Los diputados liberales", "Los diputados americanos", "Los criados del rey"],
       explicacion: "Frente a ellos estaban los liberales (Argüelles, Muñoz Torrero) y los americanos.",
-      fuente: "Tema 4, diap. 2–13"
+      fuente: "Tema 4, diap. 2–13; Vocabulario (hasta 1833): Absolutistas"
     },
     {
       tema: "conceptos", nivel: "basico",
@@ -579,7 +582,7 @@ window.ACTIVIDADES["crisis-antiguo-regimen"] = {
       correcta: "Universal masculino e indirecto",
       incorrectas: ["Censitario y directo", "Universal masculino y femenino", "No había elecciones: el rey nombraba a los diputados"],
       explicacion: "Votaban los hombres, pero de forma indirecta: elegían a quienes después elegían a los diputados. Un diputado por cada 70.000 habitantes.",
-      fuente: "Tema 4, diap. 16–34"
+      fuente: "Tema 4, diap. 16–34; Vocabulario (hasta 1833): Sufragio"
     },
     {
       tema: "conceptos", nivel: "basico",
@@ -587,7 +590,7 @@ window.ACTIVIDADES["crisis-antiguo-regimen"] = {
       correcta: "Que las mujeres pudieran reinar",
       incorrectas: ["La vuelta de los jesuitas", "La libertad de imprenta", "La venta de los bienes de la Iglesia"],
       explicacion: "Abolía la Ley Sálica. Gracias a ella podía reinar Isabel, y Carlos María Isidro quedaba fuera.",
-      fuente: "Tema 5, diap. 56–70"
+      fuente: "Tema 5, diap. 56–70; Vocabulario (hasta 1833): Pragmática Sanción, Ley Sálica"
     },
     {
       tema: "conceptos", nivel: "normal",
@@ -595,7 +598,7 @@ window.ACTIVIDADES["crisis-antiguo-regimen"] = {
       correcta: "Una carta otorgada inspirada en el modelo francés",
       incorrectas: ["La primera constitución aprobada por las Cortes", "El tratado que devolvió el trono a Fernando VII", "El decreto que abolió los señoríos"],
       explicacion: "Una carta otorgada la concede el monarca: no nace de la soberanía nacional. Reconocía algunos derechos, pero apenas se aplicó.",
-      fuente: "Tema 3, diap. 57–61"
+      fuente: "Tema 3, diap. 57–61; Vocabulario (hasta 1833): Carta Otorgada"
     },
     {
       tema: "conceptos", nivel: "normal",
@@ -603,7 +606,7 @@ window.ACTIVIDADES["crisis-antiguo-regimen"] = {
       correcta: "Unicamerales",
       incorrectas: ["Bicamerales, con Congreso y Senado", "Estamentales, por nobleza, clero y estado llano", "Nombradas directamente por el rey"],
       explicacion: "Las Cortes hacían las leyes; el rey las sancionaba y tenía un veto suspensivo de dos años.",
-      fuente: "Tema 4, diap. 16–34"
+      fuente: "Tema 4, diap. 16–34; Vocabulario (hasta 1833): Cortes"
     },
     {
       tema: "conceptos", nivel: "normal",
@@ -627,7 +630,7 @@ window.ACTIVIDADES["crisis-antiguo-regimen"] = {
       correcta: "Los exaltados buscaban el apoyo popular; los moderados pactaban con la oligarquía",
       incorrectas: ["Los moderados eran absolutistas y los exaltados, liberales", "Los exaltados querían repartir la tierra entre los campesinos", "Los moderados apoyaban a José I"],
       explicacion: "Las diferencias eran más tácticas que de fondo: ninguno de los dos planteó el reparto de la tierra.",
-      fuente: "Tema 5, diap. 34–46"
+      fuente: "Tema 5, diap. 34–46; Vocabulario (hasta 1833): Exaltados"
     },
     {
       tema: "conceptos", nivel: "normal",
@@ -643,7 +646,7 @@ window.ACTIVIDADES["crisis-antiguo-regimen"] = {
       correcta: "Se abolieron los jurisdiccionales; los territoriales pasaron a ser propiedad privada",
       incorrectas: ["Se abolieron todos y la tierra se repartió entre los campesinos", "Se mantuvieron tal y como estaban", "Pasaron a ser propiedad del Estado"],
       explicacion: "El señor perdió el derecho a juzgar y cobrar tributos, pero conservó la tierra. Esa ambigüedad provocó pleitos interminables.",
-      fuente: "Tema 4, diap. 9–10, 14–15 y 20–23"
+      fuente: "Tema 4, diap. 9–10, 14–15 y 20–23; Vocabulario (hasta 1833): Señorío"
     },
     {
       tema: "conceptos", nivel: "normal",
@@ -651,7 +654,7 @@ window.ACTIVIDADES["crisis-antiguo-regimen"] = {
       correcta: "Solo en materia política; lo religioso seguía bajo censura",
       incorrectas: ["Total, también en materia religiosa", "Solo para los periódicos del gobierno", "Solo en las colonias americanas"],
       explicacion: "Las Cortes de Cádiz no rompieron con la Iglesia: la Constitución mantuvo la confesionalidad católica exclusiva.",
-      fuente: "Tema 4, diap. 9–10, 14–15 y 20–23"
+      fuente: "Tema 4, diap. 9–10, 14–15 y 20–23; Vocabulario (hasta 1833): Censura"
     },
     {
       tema: "conceptos", nivel: "normal",
@@ -707,7 +710,7 @@ window.ACTIVIDADES["crisis-antiguo-regimen"] = {
       correcta: "Los ayuntamientos electivos y la Milicia Nacional",
       incorrectas: ["La Inquisición y los gremios", "La camarilla y los Voluntarios Realistas", "Los mayorazgos y los señoríos"],
       explicacion: "Aun así, la Milicia Nacional exigía ser propietario: los liberales de Cádiz temían al pueblo.",
-      fuente: "Tema 4, diap. 16–34"
+      fuente: "Tema 4, diap. 16–34; Vocabulario (hasta 1833): Milicia Nacional"
     },
     {
       tema: "conceptos", nivel: "extremo",
@@ -715,7 +718,7 @@ window.ACTIVIDADES["crisis-antiguo-regimen"] = {
       correcta: "La soberanía nacional",
       incorrectas: ["La monarquía de derecho divino", "La separación Iglesia-Estado", "El sufragio censitario"],
       explicacion: "Son los artículos 2 y 3 de la Constitución de 1812: la nación ya no pertenece al rey.",
-      fuente: "Tema 4, diap. 16–34"
+      fuente: "Tema 4, diap. 16–34; Vocabulario (hasta 1833): Soberanía Nacional"
     },
     {
       tema: "conceptos", nivel: "extremo",
@@ -739,7 +742,7 @@ window.ACTIVIDADES["crisis-antiguo-regimen"] = {
       correcta: "Los exaltados",
       incorrectas: ["Los moderados", "Los serviles", "Los afrancesados"],
       explicacion: "Los exaltados buscaban el apoyo popular; los moderados preferían dejar al pueblo fuera del juego político.",
-      fuente: "Tema 5, diap. 34–46"
+      fuente: "Tema 5, diap. 34–46; Vocabulario (hasta 1833): Exaltados, Sociedades Patrióticas"
     },
     {
       tema: "conceptos", nivel: "extremo",
@@ -765,6 +768,71 @@ window.ACTIVIDADES["crisis-antiguo-regimen"] = {
       explicacion: "Los americanos solían ser liberales en lo peninsular, pero a menudo conservadores en su propio territorio.",
       fuente: "Tema 4, diap. 2–13"
     },
+    {
+      tema: "conceptos", nivel: "basico",
+      texto: "¿Qué es el absolutismo?",
+      correcta: "Una monarquía en la que el rey concentra todos los poderes, con un origen divino",
+      incorrectas: ["Una monarquía en la que el rey solo reina y las Cortes gobiernan", "Un gobierno elegido por todos los ciudadanos", "Una república con separación de poderes"],
+      explicacion: "El rey reunía el poder legislativo, el ejecutivo y el judicial. Carlos IV y Fernando VII lo encarnaron; Fernando VII lo restauró en 1814 y en 1823.",
+      fuente: "Vocabulario (hasta 1833): Absolutismo; Tema 5, diap. 2–6 y 46–49"
+    },
+    {
+      tema: "conceptos", nivel: "basico",
+      texto: "¿Qué principio de la Constitución de 1812 separa el poder legislativo, el ejecutivo y el judicial?",
+      correcta: "La división de poderes",
+      incorrectas: ["La soberanía real", "La confesionalidad católica", "El veto suspensivo"],
+      explicacion: "Frente al absolutismo, que los concentraba en el rey, la Constitución de 1812 los separó.",
+      fuente: "Vocabulario (hasta 1833): División de poderes; Tema 4, diap. 16–34"
+    },
+    {
+      tema: "conceptos", nivel: "basico",
+      texto: "¿Qué impedía la Ley Sálica?",
+      correcta: "Que las mujeres heredaran el trono",
+      incorrectas: ["Que los extranjeros fueran ministros", "Que el rey disolviera las Cortes", "Que la Iglesia vendiera sus tierras"],
+      explicacion: "La Pragmática Sanción la abolió en 1830, lo que permitió reinar a Isabel II.",
+      fuente: "Vocabulario (hasta 1833): Ley Sálica; Tema 5, diap. 56–70"
+    },
+    {
+      tema: "conceptos", nivel: "basico",
+      texto: "Con la Constitución de 1812, los habitantes dejan de ser súbditos del rey y pasan a ser…",
+      correcta: "Ciudadanos",
+      incorrectas: ["Vasallos", "Siervos", "Estamentos"],
+      explicacion: "El súbdito está sujeto a la autoridad del rey; el ciudadano forma parte de la nación soberana y tiene derechos y libertades.",
+      fuente: "Vocabulario (hasta 1833): Ciudadanos, Súbditos; Tema 4, diap. 16–34"
+    },
+    {
+      tema: "conceptos", nivel: "normal",
+      texto: "¿Qué distingue una monarquía constitucional de una monarquía absoluta?",
+      correcta: "Hay separación de poderes y las leyes las hace un parlamento",
+      incorrectas: ["El rey es elegido por votación", "No existe rey", "El rey tiene un origen divino y concentra todos los poderes"],
+      explicacion: "En la monarquía constitucional el rey ejerce el poder ejecutivo, pero el legislativo corresponde a las Cortes, como en la Constitución de 1812.",
+      fuente: "Vocabulario (hasta 1833): Monarquía constitucional; Tema 4, diap. 16–34"
+    },
+    {
+      tema: "conceptos", nivel: "normal",
+      texto: "¿Qué tribunal suprimieron las Cortes de Cádiz y restableció Fernando VII tras 1814?",
+      correcta: "La Inquisición",
+      incorrectas: ["El Tribunal Supremo", "La Junta Suprema Central", "El Consejo de Regencia"],
+      explicacion: "Su supresión fue una de las grandes medidas de Cádiz; su vuelta, con los señoríos, los diezmos y los jesuitas, marcó el Sexenio absolutista.",
+      fuente: "Vocabulario (hasta 1833): Inquisición; Tema 4, diap. 9–10, 14–15 y 20–23; Tema 5, diap. 7–24"
+    },
+    {
+      tema: "conceptos", nivel: "normal",
+      texto: "¿Quiénes eran los criollos?",
+      correcta: "Los nacidos en América de familia de origen español",
+      incorrectas: ["Los españoles nacidos en la Península que gobernaban América", "Los indígenas americanos", "Los soldados de la expedición de 1815"],
+      explicacion: "Formaron juntas en nombre de Fernando VII en 1808-1810 y acabaron protagonizando la independencia.",
+      fuente: "Vocabulario (hasta 1833): Criollos; Tema 5, diap. 25–31"
+    },
+    {
+      tema: "conceptos", nivel: "extremo",
+      texto: "Tras la muerte de Fernando VII, ¿qué causa defendió en España el legitimismo?",
+      correcta: "La carlista",
+      incorrectas: ["La liberal", "La afrancesada", "La republicana"],
+      explicacion: "Los legitimistas consideraban que Carlos María Isidro tenía los derechos legítimos al trono, frente a Isabel II.",
+      fuente: "Vocabulario (hasta 1833): Legitimismo; Tema 5, diap. 56–70"
+    },
+
 
     /* ==================== CAUSAS Y CONSECUENCIAS ==================== */
     {
