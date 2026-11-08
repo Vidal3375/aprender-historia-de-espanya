@@ -344,14 +344,14 @@ window.EJE_CRONOLOGICO = {
     },
     {
       id: "mendizabal", titulo: "Desamortización de Mendizábal", tipo: "constitucion", nivel: "normal",
-      desde: "1834", hasta: "1837", deducida: true, fechaTexto: "Entre 1834 y 1837 (año por confirmar)", etapa: "mcristina",
+      desde: "1836", fechaTexto: "1836", etapa: "mcristina",
       pista: "Se subastan los bienes eclesiásticos.",
       explicacion: "Mendizábal también organizó la Milicia Nacional, creó las Diputaciones y suprimió la Mesta. Quería crear nuevos propietarios que apoyaran la revolución liberal, pero no lo consiguió.",
       fuente: "B4", img: "mendizabal"
     },
     {
       id: "sargentos-granja", titulo: "Motín de los sargentos de La Granja", tipo: "pronunciamiento", nivel: "normal",
-      desde: "1834", hasta: "1837", deducida: true, fechaTexto: "Entre 1834 y 1837 (año por confirmar)", etapa: "mcristina",
+      desde: "1836", fechaTexto: "1836", etapa: "mcristina",
       pista: "Unos sargentos obligan a la regente a restablecer la Constitución de 1812.",
       explicacion: "A raíz de ello, los progresistas elaboraron la Constitución de 1837.",
       fuente: "B4", img: "lopez-mcristina"
@@ -372,7 +372,7 @@ window.EJE_CRONOLOGICO = {
     },
     {
       id: "bombardeo-barcelona", titulo: "Bombardeo de Barcelona", tipo: "guerra", nivel: "extremo",
-      desde: "1840", hasta: "1843", deducida: true, fechaTexto: "Durante la regencia de Espartero, 1840-1843 (año por confirmar)", etapa: "espartero",
+      desde: "1842", fechaTexto: "1842", etapa: "espartero",
       pista: "Espartero reprime con dureza un levantamiento en Barcelona.",
       explicacion: "Su política librecambista ya le había enfrentado a la burguesía industrial catalana. El bombardeo aumentó su descrédito.",
       fuente: "B4", img: "bombardeo-1842"
