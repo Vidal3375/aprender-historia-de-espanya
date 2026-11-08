@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eje cronológico 1800-1856</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Concepto: una sala de museo de noche. El cuadro ocupa la pared; delante,
+   la cartela con la carta que hay que colocar; a la derecha, el eje como un
+   listón vertical donde se cuelgan los hechos ya situados.
+   Aspecto oscuro único y deliberado (la pintura manda), con todos los colores definidos. */
+:root {
+  --noche: #15120f;          /* pared en penumbra */
+  --panel: rgba(24, 20, 16, 0.86);
+  --panel-solido: #1f1a15;
+  --lienzo: #efe7d8;         /* texto principal, color de lienzo preparado */
+  --tenue: #b3a893;          /* texto secundario */
+  --linea: rgba(239, 231, 216, 0.18);
+  --oro: #d1aa55;            /* pan de oro de los marcos */
+  --oro-osc: #8c6c2c;
+  --acierto: #8fbf86;
+  --fallo: #e0735c;
+  --f-display: "IM Fell English", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --f-texto: "Alegreya Sans", "Gill Sans", "Segoe UI", system-ui, sans-serif;
+  --f-dato: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --radio: 3px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--noche);
+  color: var(--lienzo);
+  font-family: var(--f-texto);
+  font-size: 17px;
+  line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 10; background: var(--noche);
+}
+[hidden] { display: none !important; }
+a { color: var(--oro); }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--oro); outline-offset: 2px; }
+
+/* ---------- La pared (cuadro de fondo) ---------- */
+#pared { position: fixed; inset: 0; z-index: 0; overflow: hidden; background: var(--noche); }
+#pared .capa {
+  position: absolute; inset: -2%; background-size: cover; background-position: center 30%;
+  opacity: 0; transition: opacity 900ms ease, transform 12s ease-out; transform: scale(1.04);
+}
+#pared .capa.visible { opacity: 1; transform: scale(1); }
+#pared::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 35%, rgba(21,18,15,0.05) 0%, rgba(21,18,15,0.55) 60%, rgba(21,18,15,0.92) 100%),
+    linear-gradient(180deg, rgba(21,18,15,0.55) 0%, rgba(21,18,15,0.1) 30%, rgba(21,18,15,0.75) 100%);
+}
+
+/* ---------- Estructura ---------- */
+.app { position: relative; z-index: 1; min-height: 100%; display: flex; flex-direction: column; max-width: 1180px; margin: 0 auto; }
+header.barra {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px;
+  padding-block: 12px; border-bottom: 1px solid var(--linea);
+  background: linear-gradient(180deg, rgba(21,18,15,0.92), rgba(21,18,15,0.7));
+  backdrop-filter: blur(6px);
+}
+.marca { font-family: var(--f-display); font-size: 1.25rem; letter-spacing: 0.01em; margin-right: auto; }
+.marca small { font-family: var(--f-dato); font-size: 0.72rem; color: var(--tenue); letter-spacing: 0.08em; margin-left: 8px; }
+.marcador { display: flex; align-items: center; gap: 16px; font-family: var(--f-dato); font-size: 0.85rem; font-variant-numeric: tabular-nums; }
+.marcador .vidas { letter-spacing: 3px; color: var(--fallo); font-size: 1.05rem; }
+.marcador .vidas .perdida { color: var(--linea); }
+.marcador .mult { color: var(--noche); background: var(--oro); padding: 1px 6px; border-radius: var(--radio); font-weight: 600; }
+.boton-texto { background: none; border: 0; padding: 6px 4px; color: var(--tenue); cursor: pointer; font-size: 0.92rem; text-decoration: underline; text-underline-offset: 3px; }
+.boton-texto:hover { color: var(--lienzo); }
+
+.boton {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 11px 20px; border-radius: var(--radio); cursor: pointer; font-weight: 500;
+  border: 1px solid var(--oro); background: var(--oro); color: var(--noche);
+  transition: transform 120ms ease, background 120ms ease;
+}
+.boton:hover { transform: translateY(-1px); }
+.boton.sec { background: transparent; color: var(--lienzo); border-color: var(--linea); }
+.boton.sec:hover { border-color: var(--oro); }
+
+main { flex: 1; padding-block: 24px 40px; }
+.pantalla { animation: entra 400ms ease both; }
+@keyframes entra { from { opacity: 0.4; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Portada ---------- */
+.portada { display: grid; gap: 28px; max-width: 760px; padding-top: 4vh; }
+.portada h1 {
+  font-family: var(--f-display); font-weight: 400; font-size: clamp(2.6rem, 8vw, 5.2rem);
+  line-height: 0.95; margin: 0; text-wrap: balance;
+}
+.portada h1 em { color: var(--oro); font-style: italic; }
+.portada .entradilla { font-size: 1.15rem; max-width: 58ch; margin: 0; color: var(--lienzo); }
+.reglas { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; color: var(--tenue); max-width: 60ch; }
+.reglas li::before { content: "— "; color: var(--oro); }
+.niveles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.nivel {
+  text-align: left; cursor: pointer; padding: 16px; border-radius: var(--radio);
+  background: var(--panel); border: 1px solid var(--linea); display: grid; gap: 4px;
+  transition: border-color 150ms ease, transform 150ms ease;
+}
+.nivel:hover { border-color: var(--oro); transform: translateY(-2px); }
+.nivel b { font-family: var(--f-display); font-weight: 400; font-size: 1.6rem; }
+.nivel span { color: var(--tenue); font-size: 0.92rem; }
+.nivel .record { font-family: var(--f-dato); font-size: 0.75rem; color: var(--oro); }
+.acciones { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* ---------- Juego ---------- */
+.juego { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+.cartela {
+  position: sticky; top: calc(env(safe-area-inset-top, 0px) + 76px);
+  background: var(--panel); border: 1px solid var(--linea); border-top: 3px solid var(--oro);
+  border-radius: var(--radio); padding: 22px 22px 16px; display: grid; gap: 14px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+}
+.cartela .contador { font-family: var(--f-dato); font-size: 0.75rem; color: var(--tenue); letter-spacing: 0.08em; text-transform: uppercase; display: flex; justify-content: space-between; gap: 8px; }
+.cartela h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(1.7rem, 3.6vw, 2.5rem); line-height: 1.05; margin: 0; text-wrap: balance; }
+.cartela .pista { margin: 0; font-size: 1.08rem; }
+.cartela .orden { margin: 0; color: var(--oro); font-style: italic; font-family: var(--f-display); font-size: 1.15rem; }
+.tipo {
+  justify-self: start; font-family: var(--f-dato); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: var(--radio); border: 1px solid currentColor;
+}
+.t-guerra { color: #e58c72; } .t-tratado { color: #8db7e0; } .t-manifiesto { color: #c9a2e3; }
+.t-pronunciamiento { color: #e6b36a; } .t-constitucion { color: #9fd08f; } .t-clave { color: #d9cfbb; }
+
+.veredicto { font-family: var(--f-display); font-size: 1.9rem; margin: 0; line-height: 1; }
+.veredicto.bien { color: var(--acierto); } .veredicto.mal { color: var(--fallo); }
+.fecha-grande { font-family: var(--f-dato); font-size: 1.05rem; color: var(--oro); font-weight: 600; }
+.explicacion { margin: 0; }
+.meta { display: grid; gap: 4px; font-size: 0.86rem; color: var(--tenue); border-top: 1px solid var(--linea); padding-top: 10px; }
+.meta b { color: var(--lienzo); font-weight: 500; }
+.aviso { font-size: 0.86rem; border-left: 2px solid var(--oro); padding: 4px 0 4px 10px; color: var(--lienzo); }
+.pie-cuadro { font-size: 0.8rem; color: var(--tenue); border-top: 1px solid var(--linea); padding-top: 10px; }
+.pie-cuadro i { color: var(--lienzo); }
+
+.eje { position: relative; display: grid; gap: 0; padding-left: 26px; min-width: 0; }
+.eje::before { content: ""; position: absolute; left: 8px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(var(--oro), var(--oro-osc)); }
+.eje h3 { margin: 0 0 6px -26px; font-family: var(--f-dato); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tenue); font-weight: 400; }
+.hito {
+  position: relative; display: grid; grid-template-columns: 7.2ch minmax(0, 1fr); gap: 2px 12px; align-items: baseline;
+  background: var(--panel); border: 1px solid var(--linea); border-left: 4px solid var(--etapa, var(--oro));
+  border-radius: var(--radio); padding: 9px 12px;
+}
+.hito::before { content: ""; position: absolute; left: -24px; top: 15px; width: 10px; height: 10px; border-radius: 50%; background: var(--noche); border: 2px solid var(--oro); }
+.hito .anio { font-family: var(--f-dato); font-weight: 600; font-variant-numeric: tabular-nums; color: var(--oro); font-size: 0.95rem; }
+.hito .titulo { font-weight: 500; line-height: 1.25; }
+.hito .sub { grid-column: 2; font-size: 0.78rem; color: var(--tenue); }
+.hito.nuevo-bien { animation: brilla-bien 1.4s ease; }
+.hito.nuevo-mal { animation: brilla-mal 1.4s ease; border-color: var(--fallo); }
+@keyframes brilla-bien { 0% { box-shadow: 0 0 0 0 rgba(143,191,134,0.8); } 100% { box-shadow: 0 0 0 14px rgba(143,191,134,0); } }
+@keyframes brilla-mal { 0% { box-shadow: 0 0 0 0 rgba(224,115,92,0.8); } 100% { box-shadow: 0 0 0 14px rgba(224,115,92,0); } }
+
+.hueco {
+  display: block; width: 100%; margin: 3px 0; padding: 4px 10px; min-height: 30px;
+  background: transparent; border: 1px dashed transparent; border-radius: var(--radio);
+  color: var(--tenue); font-family: var(--f-dato); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+  cursor: pointer; text-align: left; transition: all 120ms ease;
+}
+.eje.activo .hueco { border-color: var(--linea); }
+.eje.activo .hueco:hover, .eje.activo .hueco:focus-visible { border-color: var(--oro); color: var(--noche); background: var(--oro); }
+.eje:not(.activo) .hueco { visibility: hidden; min-height: 8px; padding: 0; margin: 0; }
+
+/* ---------- Final y repaso ---------- */
+.final { display: grid; gap: 22px; max-width: 760px; }
+.final h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(2.2rem, 6vw, 3.6rem); margin: 0; line-height: 1; }
+.cifras { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.cifra { background: var(--panel); border: 1px solid var(--linea); border-radius: var(--radio); padding: 12px 14px; }
+.cifra b { display: block; font-family: var(--f-dato); font-size: 1.6rem; color: var(--oro); font-variant-numeric: tabular-nums; }
+.cifra span { font-size: 0.85rem; color: var(--tenue); }
+.lista-fallos { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.lista-fallos li { background: var(--panel); border: 1px solid var(--linea); border-left: 3px solid var(--fallo); padding: 10px 12px; border-radius: var(--radio); }
+.lista-fallos .fecha-grande { font-size: 0.9rem; }
+
+.repaso { display: grid; gap: 18px; max-width: 860px; }
+.repaso h1, .creditos h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(2rem, 5vw, 3rem); margin: 0; }
+.repaso h2 { font-family: var(--f-display); font-weight: 400; font-size: 1.5rem; margin: 18px 0 2px; color: var(--oro); }
+.ficha {
+  display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 14px;
+  background: var(--panel-solido); border: 1px solid var(--linea); border-left: 4px solid var(--etapa, var(--oro));
+  border-radius: var(--radio); padding: 12px;
+}
+.ficha img { width: 104px; height: 104px; object-fit: cover; border-radius: 2px; background: var(--noche); }
+.ficha h3 { margin: 0; font-size: 1.08rem; }
+.ficha p { margin: 4px 0 0; font-size: 0.95rem; }
+.ficha .meta { margin-top: 8px; }
+
+.creditos { display: grid; gap: 16px; max-width: 900px; }
+.creditos .tabla { overflow-x: auto; background: var(--panel-solido); border: 1px solid var(--linea); border-radius: var(--radio); }
+.creditos table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+.creditos th, .creditos td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--linea); vertical-align: top; }
+.creditos th { font-family: var(--f-dato); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tenue); font-weight: 400; }
+.creditos ul { margin: 0; padding-left: 20px; }
+.nota { color: var(--tenue); font-size: 0.92rem; max-width: 70ch; }
+
+@media (max-width: 820px) {
+  .juego { grid-template-columns: minmax(0, 1fr); }
+  .cartela { position: relative; top: 0; }
+  .cifras { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .niveles { grid-template-columns: minmax(0, 1fr); }
+  .ficha { grid-template-columns: 72px minmax(0, 1fr); }
+  .ficha img { width: 72px; height: 72px; }
+  .marca small { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<div id="pared" aria-hidden="true"><div class="capa"></div><div class="capa"></div></div>
+
+<div class="app">
+  <header class="barra">
+    <div class="marca">Eje cronológico <small>ESPAÑA 1800–1856</small></div>
+    <div class="marcador" id="marcador" hidden>
+      <span class="vidas" id="vidas" aria-label="Vidas"></span>
+      <span id="puntos">0 pts</span>
+      <span id="racha">racha 0</span>
+      <span class="mult" id="mult" hidden></span>
+    </div>
+    <button class="boton-texto" id="btn-inicio" type="button" hidden>Salir al inicio</button>
+  </header>
+
+  <main id="main"></main>
+</div>
+
+<script src="datos/eje-cronologico-1800-1856.js"></script>
+<script>
+(function () {
+  "use strict";
+  var D = window.EJE_CRONOLOGICO;
+  var main = document.getElementById("main");
+
+  var NIVELES = {
+    basico:  { nombre: "Básico",  incluye: ["basico"], precision: "anio", vidas: 3, texto: "Los grandes hitos. Basta con acertar el año." },
+    normal:  { nombre: "Normal",  incluye: ["basico", "normal"], precision: "anio", vidas: 3, texto: "Más tratados, pronunciamientos y leyes. Por años." },
+    extremo: { nombre: "Extremo", incluye: ["basico", "normal", "extremo"], precision: "dia", vidas: 3, texto: "Todas las cartas. Cuando los apuntes lo dan, cuentan el mes y el día." }
+  };
+  var TIPOS = { guerra: "Guerra y batalla", tratado: "Tratado", manifiesto: "Manifiesto", pronunciamiento: "Pronunciamiento", constitucion: "Constitución, ley o decreto", clave: "Fecha clave" };
+
+  /* ---------- Utilidades ---------- */
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function partes(f) { var p = String(f).split("-").map(Number); return { y: p[0], m: p[1] || 0, d: p[2] || 0 }; }
+  function inicio(c, prec) { var a = partes(c.desde); return prec === "anio" ? a.y : a.y * 10000 + (a.m || 1) * 100 + (a.d || 1); }
+  function fin(c, prec) { var b = partes(c.hasta || c.desde); return prec === "anio" ? b.y : b.y * 10000 + (b.m || 12) * 100 + (b.d || 31); }
+  /* -1: a va antes que b · 1: a va después · 0: los apuntes no permiten distinguirlos */
+  function comparar(a, b, prec) {
+    if (fin(a, prec) < inicio(b, prec)) return -1;
+    if (inicio(a, prec) > fin(b, prec)) return 1;
+    return 0;
+  }
+  function anioCorto(c) {
+    var a = partes(c.desde).y, b = partes(c.hasta || c.desde).y;
+    return a === b ? String(a) : a + "–" + String(b).slice(2);
+  }
+  function barajar(arr) { var a = arr.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function imagen(c) { return D.imagenes[c.img] || null; }
+  function rutaImg(im) { return D.carpetaImagenes + im.img; }
+  function urlCommons(im) { return "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(im.archivo).replace(/%2C/g, ","); }
+  function fuenteLarga(txt) { return esc(txt); }
+  function leerRecord(n) { try { return Number(localStorage.getItem("eje1800-record-" + n)) || 0; } catch (e) { return 0; } }
+  function guardarRecord(n, v) { try { localStorage.setItem("eje1800-record-" + n, String(v)); } catch (e) { /* sin almacenamiento: no pasa nada */ } }
+
+  /* ---------- La pared: cuadro de fondo con fundido ---------- */
+  var capas = document.querySelectorAll("#pared .capa"), capaActiva = 0, imgActual = null;
+  function ponerFondo(clave) {
+    var im = D.imagenes[clave];
+    if (!im || clave === imgActual) return;
+    imgActual = clave;
+    var src = rutaImg(im), pre = new Image();
+    pre.onload = function () {
+      if (imgActual !== clave) return;
+      var sig = capas[1 - capaActiva];
+      sig.style.backgroundImage = "url(\"" + src + "\")";
+      sig.classList.add("visible"); capas[capaActiva].classList.remove("visible");
+      capaActiva = 1 - capaActiva;
+    };
+    pre.onerror = function () { capas[capaActiva].classList.remove("visible"); };
+    pre.src = src;
+  }
+  function pieCuadro(c) {
+    var im = imagen(c);
+    if (!im) return "";
+    var datos = [im.autor, im.fecha, im.lugar].filter(Boolean).map(esc).join(" · ");
+    return '<div class="pie-cuadro">En la pared: <i>' + esc(im.obra) + "</i>" + (datos ? " — " + datos : "") +
+      ". " + esc(im.licencia) + '. <a href="' + urlCommons(im) + '" target="_blank" rel="noopener">Ficha en Wikimedia Commons</a>' +
+      (im.nota ? ". " + esc(im.nota) : "") + "</div>";
+  }
+
+  /* ---------- Estado de la partida ---------- */
+  var P = null;
+  var marcador = document.getElementById("marcador"), btnInicio = document.getElementById("btn-inicio");
+  btnInicio.addEventListener("click", portada);
+
+  function actualizarMarcador() {
+    var v = ""; for (var i = 0; i < NIVELES[P.nivel].vidas; i++) v += i < P.vidas ? "♥" : '<span class="perdida">♥</span>';
+    document.getElementById("vidas").innerHTML = v;
+    document.getElementById("puntos").textContent = P.puntos + " pts";
+    document.getElementById("racha").textContent = "racha " + P.racha;
+    var m = multiplicador(), elM = document.getElementById("mult");
+    elM.hidden = m === 1; elM.textContent = "×" + m;
+  }
+  function multiplicador() { return 1 + Math.min(2, Math.floor(P.racha / 3)); }
+
+  /* ---------- Portada ---------- */
+  function portada() {
+    P = null; marcador.hidden = true; btnInicio.hidden = true;
+    ponerFondo("goya-tres-mayo");
+    var cuenta = {};
+    Object.keys(NIVELES).forEach(function (n) { cuenta[n] = D.cartas.filter(function (c) { return NIVELES[n].incluye.indexOf(c.nivel) >= 0; }).length; });
+    main.innerHTML =
+      '<section class="pantalla portada">' +
+        '<h1>De Trafalgar a la <em>Constitución non nata</em></h1>' +
+        '<p class="entradilla">Coloca cada guerra, tratado, manifiesto y pronunciamiento en su sitio del eje, desde 1800 hasta 1856. Detrás de cada carta, el cuadro de sus protagonistas.</p>' +
+        '<ul class="reglas">' +
+          "<li>Empiezas con un hecho ya situado. Pulsa el hueco del eje donde creas que va la carta nueva.</li>" +
+          "<li>Tres aciertos seguidos multiplican tus puntos (hasta ×3).</li>" +
+          "<li>Tienes tres vidas. Cada fallo cuesta una, pero la carta se coloca igualmente en su sitio para que aprendas.</li>" +
+          "<li>Todos los datos salen de los apuntes. Si los apuntes no dan el año exacto, el juego lo avisa y acepta cualquier posición compatible.</li>" +
+        "</ul>" +
+        '<div class="niveles">' +
+          Object.keys(NIVELES).map(function (n) {
+            var r = leerRecord(n);
+            return '<button class="nivel" type="button" data-nivel="' + n + '"><b>' + NIVELES[n].nombre + "</b><span>" + cuenta[n] + " cartas. " + esc(NIVELES[n].texto) + "</span>" +
+              (r ? '<span class="record">Tu récord: ' + r + " pts</span>" : "") + "</button>";
+          }).join("") +
+        "</div>" +
+        '<div class="acciones"><button class="boton sec" type="button" id="btn-repaso">Repasar el eje completo</button>' +
+        '<button class="boton sec" type="button" id="btn-creditos">Fuentes e imágenes</button></div>' +
+      "</section>";
+    main.querySelectorAll(".nivel").forEach(function (b) { b.addEventListener("click", function () { empezar(b.dataset.nivel); }); });
+    document.getElementById("btn-repaso").addEventListener("click", repaso);
+    document.getElementById("btn-creditos").addEventListener("click", creditos);
+    window.scrollTo(0, 0);
+  }
+
+  /* ---------- Partida ---------- */
+  function empezar(nivel) {
+    var N = NIVELES[nivel];
+    var mazo = barajar(D.cartas.filter(function (c) { return N.incluye.indexOf(c.nivel) >= 0; }));
+    P = { nivel: nivel, prec: N.precision, mazo: mazo, eje: [mazo.shift()], actual: null, vidas: N.vidas,
+          puntos: 0, racha: 0, mejorRacha: 0, aciertos: 0, jugadas: 0, fallos: [], total: mazo.length, ultimo: null, ultimoBien: null };
+    marcador.hidden = false; btnInicio.hidden = false;
+    siguiente();
+  }
+
+  function siguiente() {
+    if (P.vidas <= 0 || P.mazo.length === 0) { final(); return; }
+    P.actual = P.mazo.shift();
+    P.ultimo = null;
+    actualizarMarcador();
+    ponerFondo(P.actual.img);
+    pintarJuego();
+  }
+
+  function pintarJuego(feedback) {
+    var c = P.actual, N = NIVELES[P.nivel];
+    var cartela;
+    if (!feedback) {
+      cartela =
+        '<div class="contador"><span>Carta ' + (P.jugadas + 1) + " de " + P.total + "</span><span>" + esc(N.nombre) + "</span></div>" +
+        '<span class="tipo t-' + c.tipo + '">' + esc(TIPOS[c.tipo]) + "</span>" +
+        "<h2>" + esc(c.titulo) + "</h2>" +
+        '<p class="pista">' + esc(c.pista) + "</p>" +
+        '<p class="orden">¿Dónde va en el eje? Pulsa un hueco.</p>' +
+        pieCuadro(c);
+    } else {
+      var et = D.etapas[c.etapa];
+      cartela =
+        '<p class="veredicto ' + (feedback.bien ? "bien" : "mal") + '">' + (feedback.bien ? "Bien situada" : "No iba ahí") + "</p>" +
+        (feedback.bien ? '<div class="contador"><span>+' + feedback.ganados + " puntos</span></div>" : "") +
+        '<span class="tipo t-' + c.tipo + '">' + esc(TIPOS[c.tipo]) + "</span>" +
+        "<h2>" + esc(c.titulo) + "</h2>" +
+        '<div class="fecha-grande">' + esc(c.fechaTexto) + "</div>" +
+        (c.deducida ? '<div class="aviso">Los apuntes no dan el año exacto. El intervalo sale del orden del resumen y el juego acepta cualquier posición dentro de él.</div>' : "") +
+        '<p class="explicacion">' + esc(c.explicacion) + "</p>" +
+        '<div class="meta"><span><b>Etapa:</b> ' + esc(et ? et.nombre : "") + "</span><span><b>Fuente:</b> " + fuenteLarga(c.fuente) + "</span></div>" +
+        pieCuadro(c) +
+        '<div class="acciones"><button class="boton" type="button" id="btn-sig">' + (P.vidas <= 0 || P.mazo.length === 0 ? "Ver resultado" : "Siguiente carta") + "</button></div>";
+    }
+
+    var eje = '<h3>Tu eje · ' + P.eje.length + " hechos</h3>";
+    for (var i = 0; i <= P.eje.length; i++) {
+      eje += '<button class="hueco" type="button" data-pos="' + i + '"' + (feedback ? ' tabindex="-1"' : "") + ">Colocar aquí</button>";
+      if (i < P.eje.length) {
+        var h = P.eje[i], e = D.etapas[h.etapa];
+        var cls = h === P.ultimo ? (P.ultimoBien ? " nuevo-bien" : " nuevo-mal") : "";
+        eje += '<div class="hito' + cls + '" style="--etapa:' + (e ? e.color : "") + '"><span class="anio">' + esc(anioCorto(h)) + '</span><span class="titulo">' + esc(h.titulo) + '</span><span class="sub">' + esc(TIPOS[h.tipo]) + (P.prec === "dia" && partes(h.desde).m ? " · " + esc(h.fechaTexto) : "") + "</span></div>";
+      }
+    }
+
+    main.innerHTML = '<section class="pantalla juego"><div class="cartela" aria-live="polite">' + cartela + '</div><div class="eje' + (feedback ? "" : " activo") + '" id="eje">' + eje + "</div></section>";
+
+    if (!feedback) {
+      main.querySelectorAll(".hueco").forEach(function (b) { b.addEventListener("click", function () { colocar(Number(b.dataset.pos)); }); });
+    } else {
+      var bs = document.getElementById("btn-sig");
+      bs.addEventListener("click", siguiente);
+      if (window.matchMedia("(max-width: 820px)").matches) { main.querySelector(".cartela").scrollIntoView({ behavior: "smooth", block: "start" }); }
+      bs.focus({ preventScroll: true });
+      var nuevo = main.querySelector(".nuevo-bien, .nuevo-mal");
+      if (nuevo && !window.matchMedia("(max-width: 820px)").matches) nuevo.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }
+
+  function posicionCorrecta(c) {
+    for (var i = 0; i < P.eje.length; i++) if (comparar(P.eje[i], c, P.prec) > 0) return i;
+    return P.eje.length;
+  }
+
+  function colocar(pos) {
+    var c = P.actual, prev = P.eje[pos - 1], next = P.eje[pos];
+    var bien = (!prev || comparar(prev, c, P.prec) <= 0) && (!next || comparar(next, c, P.prec) >= 0);
+    P.jugadas++;
+    var ganados = 0;
+    if (bien) {
+      P.racha++; P.mejorRacha = Math.max(P.mejorRacha, P.racha);
+      ganados = 10 * multiplicador(); P.puntos += ganados; P.aciertos++;
+      P.eje.splice(pos, 0, c);
+    } else {
+      P.racha = 0; P.vidas--; P.fallos.push(c);
+      P.eje.splice(posicionCorrecta(c), 0, c);
+    }
+    P.ultimo = c; P.ultimoBien = bien;
+    actualizarMarcador();
+    pintarJuego({ bien: bien, ganados: ganados });
+  }
+
+  /* ---------- Final ---------- */
+  function final() {
+    var rec = leerRecord(P.nivel), nuevoRec = P.puntos > rec;
+    if (nuevoRec) guardarRecord(P.nivel, P.puntos);
+    var completo = P.mazo.length === 0 && P.vidas > 0;
+    ponerFondo(completo ? "goya-alegoria" : "goya-tres-mayo");
+    main.innerHTML =
+      '<section class="pantalla final">' +
+        "<h1>" + (completo ? "Eje completo" : "Sin vidas") + "</h1>" +
+        '<p class="nota">' + (completo ? "Has colocado todas las cartas del nivel " + esc(NIVELES[P.nivel].nombre) + "." : "Te has quedado sin vidas en el nivel " + esc(NIVELES[P.nivel].nombre) + ". Quedaban " + (P.mazo.length + 1) + " cartas por colocar.") +
+        (nuevoRec ? " Nuevo récord personal." : rec ? " Tu récord sigue en " + rec + " puntos." : "") + "</p>" +
+        '<div class="cifras">' +
+          '<div class="cifra"><b>' + P.puntos + "</b><span>puntos</span></div>" +
+          '<div class="cifra"><b>' + P.aciertos + "/" + P.jugadas + "</b><span>aciertos</span></div>" +
+          '<div class="cifra"><b>' + P.mejorRacha + "</b><span>mejor racha</span></div>" +
+          '<div class="cifra"><b>' + P.eje.length + "</b><span>hechos en tu eje</span></div>" +
+        "</div>" +
+        (P.fallos.length ? "<h2 style=\"font-family:var(--f-display);font-weight:400;margin:0\">Para repasar</h2><ul class=\"lista-fallos\">" + P.fallos.map(function (c) {
+          return '<li><div class="fecha-grande">' + esc(c.fechaTexto) + "</div><b>" + esc(c.titulo) + "</b><div>" + esc(c.explicacion) + '</div><div class="nota">Fuente: ' + esc(c.fuente) + "</div></li>";
+        }).join("") + "</ul>" : "") +
+        '<div class="acciones"><button class="boton" type="button" id="btn-otra">Jugar otra vez</button>' +
+        '<button class="boton sec" type="button" id="btn-niveles">Elegir nivel</button>' +
+        '<button class="boton sec" type="button" id="btn-rep">Repasar el eje completo</button></div>' +
+      "</section>";
+    var niv = P.nivel;
+    document.getElementById("btn-otra").addEventListener("click", function () { empezar(niv); });
+    document.getElementById("btn-niveles").addEventListener("click", portada);
+    document.getElementById("btn-rep").addEventListener("click", repaso);
+    marcador.hidden = true;
+    window.scrollTo(0, 0);
+  }
+
+  /* ---------- Repaso: el eje completo ordenado ---------- */
+  function repaso() {
+    P = null; marcador.hidden = true; btnInicio.hidden = false;
+    ponerFondo("goya-familia");
+    var orden = D.cartas.slice().sort(function (a, b) { return inicio(a, "dia") - inicio(b, "dia") || fin(a, "dia") - fin(b, "dia"); });
+    var html = '<section class="pantalla repaso"><h1>El eje completo</h1><p class="nota">Las ' + orden.length + " cartas del juego, en orden. Las del nivel Extremo aparecen marcadas. Pulsa una imagen para ver su ficha en Wikimedia Commons.</p>";
+    var etapaPrev = null;
+    orden.forEach(function (c) {
+      if (c.etapa !== etapaPrev) { html += "<h2>" + esc(D.etapas[c.etapa].nombre) + "</h2>"; etapaPrev = c.etapa; }
+      var im = imagen(c), e = D.etapas[c.etapa];
+      html += '<article class="ficha" style="--etapa:' + e.color + '">' +
+        (im ? '<a href="' + urlCommons(im) + '" target="_blank" rel="noopener"><img loading="lazy" src="' + rutaImg(im) + '" alt="' + esc(im.obra + (im.autor ? ", " + im.autor : "")) + '"></a>' : "<span></span>") +
+        '<div><div class="fecha-grande">' + esc(c.fechaTexto) + "</div><h3>" + esc(c.titulo) + "</h3>" +
+        '<span class="tipo t-' + c.tipo + '">' + esc(TIPOS[c.tipo]) + (c.nivel === "extremo" ? " · extremo" : "") + "</span>" +
+        "<p>" + esc(c.explicacion) + "</p>" +
+        '<div class="meta"><span><b>Fuente:</b> ' + esc(c.fuente) + "</span>" + (im ? "<span><b>Imagen:</b> " + esc(im.obra) + (im.autor ? " (" + esc(im.autor) + ")" : "") + " · " + esc(im.licencia) + "</span>" : "") + "</div></div></article>";
+    });
+    html += '<div class="acciones"><button class="boton" type="button" id="btn-volver">Volver al inicio</button></div></section>';
+    main.innerHTML = html;
+    document.getElementById("btn-volver").addEventListener("click", portada);
+    window.scrollTo(0, 0);
+  }
+
+  /* ---------- Fuentes y créditos ---------- */
+  function creditos() {
+    P = null; marcador.hidden = true; btnInicio.hidden = false;
+    var usadas = {};
+    D.cartas.forEach(function (c) { usadas[c.img] = true; });
+    var filas = Object.keys(D.imagenes).filter(function (k) { return usadas[k]; }).map(function (k) {
+      var im = D.imagenes[k];
+      return "<tr><td><i>" + esc(im.obra) + "</i></td><td>" + esc(im.autor) + "</td><td>" + esc(im.fecha) + "</td><td>" + esc(im.lugar) + "</td><td>" + esc(im.licencia) + '</td><td><a href="' + urlCommons(im) + '" target="_blank" rel="noopener">Commons</a></td></tr>';
+    }).join("");
+    main.innerHTML =
+      '<section class="pantalla creditos"><h1>Fuentes e imágenes</h1>' +
+      "<h2 style=\"font-family:var(--f-display);font-weight:400;margin:0\">Contenido</h2>" +
+      '<p class="nota">Todos los datos del juego salen de estos apuntes. Cada carta indica de cuál.</p><ul>' +
+      Object.keys(D.fuentes).map(function (k) { return "<li><b>" + esc(k) + "</b>: " + esc(D.fuentes[k]) + "</li>"; }).join("") + "</ul>" +
+      '<p class="nota">Cuando los apuntes no dan el año exacto de un hecho, la carta muestra el intervalo que se deduce del resumen y lo avisa.</p>' +
+      "<h2 style=\"font-family:var(--f-display);font-weight:400;margin:0\">Imágenes</h2>" +
+      '<p class="nota">Todas proceden de Wikimedia Commons. La licencia se ha comprobado en la ficha de cada archivo: casi todas son de dominio público. La fotografía de Espartero de J. Laurent es CC BY 4.0 (Biblioteca Nacional de España).</p>' +
+      '<div class="tabla"><table><thead><tr><th>Obra</th><th>Autor</th><th>Fecha</th><th>Lugar</th><th>Licencia</th><th>Ficha</th></tr></thead><tbody>' + filas + "</tbody></table></div>" +
+      '<div class="acciones"><button class="boton" type="button" id="btn-volver">Volver al inicio</button></div></section>';
+    document.getElementById("btn-volver").addEventListener("click", portada);
+    window.scrollTo(0, 0);
+  }
+
+  portada();
+})();
+</script>
+</body>
+</html>
