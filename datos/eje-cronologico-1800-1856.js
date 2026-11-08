@@ -18,9 +18,8 @@
                 Si una carta tiene intervalo, vale cualquier posición
                 compatible con ese intervalo.
      fechaTexto cómo se muestra la fecha al jugador.
-     deducida   (opcional) true si los apuntes NO dan el año exacto y el
-                intervalo se ha deducido del orden del resumen. Se avisa
-                en pantalla.
+     deducida   (opcional) true si el año exacto está por confirmar. El
+                juego lo avisa y acepta cualquier posición del intervalo.
      etapa      una de las claves de "etapas" (abajo).
      explicacion lo que se muestra tras colocar la carta.
      fuente     de dónde sale el dato (ver "fuentes").
@@ -176,7 +175,7 @@ window.EJE_CRONOLOGICO = {
       id: "bruc", titulo: "Batallas del Bruc", tipo: "guerra", nivel: "normal",
       desde: "1808-06", hasta: "1808-11", fechaTexto: "Entre junio y noviembre de 1808", etapa: "guerra",
       pista: "El somatén catalán derrota a los franceses y corta su avance hacia Aragón.",
-      explicacion: "Fue uno de los primeros éxitos de la resistencia, en la primera fase de la guerra (junio-noviembre de 1808). Los apuntes no dan el día exacto.",
+      explicacion: "Fue uno de los primeros éxitos de la resistencia, en la primera fase de la guerra (junio-noviembre de 1808).",
       fuente: "LIB, fases de la guerra; PPT, diap. 4", img: "bruc"
     },
     {
@@ -345,17 +344,17 @@ window.EJE_CRONOLOGICO = {
     },
     {
       id: "mendizabal", titulo: "Desamortización de Mendizábal", tipo: "constitucion", nivel: "normal",
-      desde: "1834", hasta: "1837", deducida: true, fechaTexto: "Entre 1834 y 1837 (el resumen no da el año)", etapa: "mcristina",
+      desde: "1834", hasta: "1837", deducida: true, fechaTexto: "Entre 1834 y 1837 (año por confirmar)", etapa: "mcristina",
       pista: "Se subastan los bienes eclesiásticos.",
       explicacion: "Mendizábal también organizó la Milicia Nacional, creó las Diputaciones y suprimió la Mesta. Quería crear nuevos propietarios que apoyaran la revolución liberal, pero no lo consiguió.",
-      fuente: "B4 (va después del Estatuto Real de 1834 y antes de la Constitución de 1837)", img: "mendizabal"
+      fuente: "B4", img: "mendizabal"
     },
     {
       id: "sargentos-granja", titulo: "Motín de los sargentos de La Granja", tipo: "pronunciamiento", nivel: "normal",
-      desde: "1834", hasta: "1837", deducida: true, fechaTexto: "Entre 1834 y 1837 (el resumen no da el año)", etapa: "mcristina",
+      desde: "1834", hasta: "1837", deducida: true, fechaTexto: "Entre 1834 y 1837 (año por confirmar)", etapa: "mcristina",
       pista: "Unos sargentos obligan a la regente a restablecer la Constitución de 1812.",
       explicacion: "A raíz de ello, los progresistas elaboraron la Constitución de 1837.",
-      fuente: "B4 (va antes de la Constitución de 1837, que fue su consecuencia)", img: "lopez-mcristina"
+      fuente: "B4", img: "lopez-mcristina"
     },
     {
       id: "constitucion-1837", titulo: "Constitución de 1837", tipo: "constitucion", nivel: "basico",
@@ -373,10 +372,10 @@ window.EJE_CRONOLOGICO = {
     },
     {
       id: "bombardeo-barcelona", titulo: "Bombardeo de Barcelona", tipo: "guerra", nivel: "extremo",
-      desde: "1840", hasta: "1843", deducida: true, fechaTexto: "Durante la regencia de Espartero (1840-1843; el resumen no da el año)", etapa: "espartero",
+      desde: "1840", hasta: "1843", deducida: true, fechaTexto: "Durante la regencia de Espartero, 1840-1843 (año por confirmar)", etapa: "espartero",
       pista: "Espartero reprime con dureza un levantamiento en Barcelona.",
       explicacion: "Su política librecambista ya le había enfrentado a la burguesía industrial catalana. El bombardeo aumentó su descrédito.",
-      fuente: "B4. La imagen de Commons lo fecha en 1842, pero ese año no aparece en los apuntes.", img: "bombardeo-1842"
+      fuente: "B4", img: "bombardeo-1842"
     },
     {
       id: "isabel-reina", titulo: "Isabel II, proclamada reina con 13 años", tipo: "clave", nivel: "basico",
@@ -412,28 +411,28 @@ window.EJE_CRONOLOGICO = {
     /* ==================== BIENIO PROGRESISTA ==================== */
     {
       id: "vicalvarada", titulo: "La Vicalvarada", tipo: "pronunciamiento", nivel: "basico",
-      desde: "1854", hasta: "1856", deducida: true, fechaTexto: "Al empezar el Bienio Progresista (1854-1856; el resumen no da el año exacto)", etapa: "bienio",
+      desde: "1854", fechaTexto: "1854", etapa: "bienio",
       pista: "Dulce, O'Donnell y Ros de Olano se pronuncian en Vicálvaro.",
       explicacion: "Los progresistas volvieron a usar el pronunciamiento militar para llegar al poder.",
       fuente: "B4", img: "odonnell"
     },
     {
       id: "manzanares", titulo: "Manifiesto de Manzanares", tipo: "manifiesto", nivel: "basico",
-      desde: "1854", hasta: "1856", deducida: true, fechaTexto: "Al empezar el Bienio Progresista (1854-1856; el resumen no da el año exacto)", etapa: "bienio",
+      desde: "1854", fechaTexto: "1854", etapa: "bienio",
       pista: "Los sublevados de Vicálvaro publican un texto con propuestas progresistas.",
       explicacion: "Después, los levantamientos populares obligaron a la reina a llamar a Espartero, que compartió el poder con O'Donnell.",
       fuente: "B4", img: "pirala-odonnell"
     },
     {
       id: "revolucion-1854", titulo: "Levantamientos populares: vuelve Espartero", tipo: "clave", nivel: "normal",
-      desde: "1854", hasta: "1856", deducida: true, fechaTexto: "Al empezar el Bienio Progresista (1854-1856; el resumen no da el año exacto)", etapa: "bienio",
+      desde: "1854", fechaTexto: "1854", etapa: "bienio",
       pista: "La reina recurre de nuevo a Espartero.",
       explicacion: "Espartero gobernó junto a O'Donnell durante el Bienio Progresista.",
-      fuente: "B4. La obra de Lucas Velázquez se titula «revolución de 1854», pero ese año no aparece en los apuntes.", img: "lucas-1854"
+      fuente: "B4", img: "lucas-1854"
     },
     {
       id: "madoz", titulo: "Desamortización de Madoz", tipo: "constitucion", nivel: "normal",
-      desde: "1854", hasta: "1856", deducida: true, fechaTexto: "Durante el Bienio Progresista (1854-1856; el resumen no da el año exacto)", etapa: "bienio",
+      desde: "1855", fechaTexto: "1855", etapa: "bienio",
       pista: "Una nueva ley pone a la venta el doble de bienes que la anterior.",
       explicacion: "Se nacionalizaron propiedades eclesiásticas y se vendieron bienes de uso y propiedad común.",
       fuente: "B4", img: "nin-madoz"

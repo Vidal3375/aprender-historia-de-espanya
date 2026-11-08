@@ -261,7 +261,7 @@ main { flex: 1; padding-block: 24px 40px; }
   function partes(f) { var p = String(f).split("-").map(Number); return { y: p[0], m: p[1] || 0, d: p[2] || 0 }; }
   function inicio(c, prec) { var a = partes(c.desde); return prec === "anio" ? a.y : a.y * 10000 + (a.m || 1) * 100 + (a.d || 1); }
   function fin(c, prec) { var b = partes(c.hasta || c.desde); return prec === "anio" ? b.y : b.y * 10000 + (b.m || 12) * 100 + (b.d || 31); }
-  /* -1: a va antes que b · 1: a va después · 0: los apuntes no permiten distinguirlos */
+  /* -1: a va antes que b · 1: a va después · 0: no se pueden distinguir con las fechas disponibles */
   function comparar(a, b, prec) {
     if (fin(a, prec) < inicio(b, prec)) return -1;
     if (inicio(a, prec) > fin(b, prec)) return 1;
@@ -334,7 +334,7 @@ main { flex: 1; padding-block: 24px 40px; }
           "<li>Empiezas con un hecho ya situado. Pulsa el hueco del eje donde creas que va la carta nueva.</li>" +
           "<li>Tres aciertos seguidos multiplican tus puntos (hasta ×3).</li>" +
           "<li>Tienes tres vidas. Cada fallo cuesta una, pero la carta se coloca igualmente en su sitio para que aprendas.</li>" +
-          "<li>Todos los datos salen de los apuntes. Si los apuntes no dan el año exacto, el juego lo avisa y acepta cualquier posición compatible.</li>" +
+          "<li>Todos los datos salen de los apuntes. Si el año de un hecho está por confirmar, el juego lo avisa y acepta cualquier posición dentro de su intervalo.</li>" +
         "</ul>" +
         '<div class="niveles">' +
           Object.keys(NIVELES).map(function (n) {
@@ -390,7 +390,7 @@ main { flex: 1; padding-block: 24px 40px; }
         '<span class="tipo t-' + c.tipo + '">' + esc(TIPOS[c.tipo]) + "</span>" +
         "<h2>" + esc(c.titulo) + "</h2>" +
         '<div class="fecha-grande">' + esc(c.fechaTexto) + "</div>" +
-        (c.deducida ? '<div class="aviso">Los apuntes no dan el año exacto. El intervalo sale del orden del resumen y el juego acepta cualquier posición dentro de él.</div>' : "") +
+        (c.deducida ? '<div class="aviso">Año por confirmar: vale cualquier posición dentro del intervalo.</div>' : "") +
         '<p class="explicacion">' + esc(c.explicacion) + "</p>" +
         '<div class="meta"><span><b>Etapa:</b> ' + esc(et ? et.nombre : "") + "</span><span><b>Fuente:</b> " + fuenteLarga(c.fuente) + "</span></div>" +
         pieCuadro(c) +
@@ -513,7 +513,7 @@ main { flex: 1; padding-block: 24px 40px; }
       "<h2 style=\"font-family:var(--f-display);font-weight:400;margin:0\">Contenido</h2>" +
       '<p class="nota">Todos los datos del juego salen de estos apuntes. Cada carta indica de cuál.</p><ul>' +
       Object.keys(D.fuentes).map(function (k) { return "<li><b>" + esc(k) + "</b>: " + esc(D.fuentes[k]) + "</li>"; }).join("") + "</ul>" +
-      '<p class="nota">Cuando los apuntes no dan el año exacto de un hecho, la carta muestra el intervalo que se deduce del resumen y lo avisa.</p>' +
+      '<p class="nota">Cuando el año exacto de un hecho está por confirmar, la carta muestra un intervalo y lo avisa.</p>' +
       "<h2 style=\"font-family:var(--f-display);font-weight:400;margin:0\">Imágenes</h2>" +
       '<p class="nota">Todas proceden de Wikimedia Commons. La licencia se ha comprobado en la ficha de cada archivo: casi todas son de dominio público. La fotografía de Espartero de J. Laurent es CC BY 4.0 (Biblioteca Nacional de España).</p>' +
       '<div class="tabla"><table><thead><tr><th>Obra</th><th>Autor</th><th>Fecha</th><th>Lugar</th><th>Licencia</th><th>Ficha</th></tr></thead><tbody>' + filas + "</tbody></table></div>" +
