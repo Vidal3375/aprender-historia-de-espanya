@@ -74,7 +74,7 @@ window.EJE_CRONOLOGICO = {
     "goya-godoy":       { img: "goya-godoy.jpg", obra: "Manuel Godoy", autor: "Francisco de Goya", fecha: "1801", lugar: "Real Academia de Bellas Artes de San Fernando", licencia: "Dominio público", archivo: "Francisco_de_Goya_-_Godoy_como_general_-_Google_Art_Project.jpg" },
     "goya-dos-mayo":    { img: "goya-dos-de-mayo.jpg", obra: "El 2 de mayo de 1808 en Madrid (La lucha con los mamelucos)", autor: "Francisco de Goya", fecha: "1814", lugar: "Museo del Prado", licencia: "Dominio público", archivo: "El_dos_de_mayo_de_1808_en_Madrid.jpg" },
     "goya-tres-mayo":   { img: "goya-tres-de-mayo.jpg", obra: "El 3 de mayo en Madrid (Los fusilamientos)", autor: "Francisco de Goya", fecha: "1814", lugar: "Museo del Prado", licencia: "Dominio público", archivo: "El_Tres_de_Mayo,_by_Francisco_de_Goya,_from_Prado_thin_black_margin.jpg" },
-    "goya-alegoria":    { img: "goya-alegoria-madrid.jpg", obra: "Alegoría de la Villa de Madrid", autor: "Francisco de Goya", fecha: "1810", lugar: "Museo de Historia de Madrid", licencia: "Dominio público", archivo: "Goya_y_Lucientes,_Francisco_de_-_Allegory_of_the_City_of_Madrid_-_1810.jpg" },
+    "goya-alegoria":    { img: "goya-alegoria-madrid.jpg", obra: "Alegoría de la Villa de Madrid", autor: "Francisco de Goya", fecha: "1810", lugar: "Museo de Historia de Madrid", licencia: "Dominio público", archivo: "Alegoría_de_la_Villa_de_Madrid_por_Goya.jpg" },
     "goya-wellington":  { img: "goya-wellington.jpg", obra: "El duque de Wellington", autor: "Francisco de Goya", fecha: "1812-1814", lugar: "National Gallery (Londres)", licencia: "Dominio público", archivo: "Goya_-_Duke_of_Wellington_-_NG6322.jpg" },
     "goya-fernando-manto":   { img: "goya-fernando-vii-manto.jpg", obra: "Fernando VII con manto real", autor: "Francisco de Goya", fecha: "1814-1815", lugar: "Museo del Prado", licencia: "Dominio público", archivo: "Francisco_Goya_-_Portrait_of_Ferdinand_VII_of_Spain_in_his_robes_of_state_(1815)_-_Prado.jpg" },
     "goya-fernando-ecuestre":{ img: "goya-fernando-vii-ecuestre.jpg", obra: "Retrato ecuestre de Fernando VII", autor: "Francisco de Goya", fecha: "1808", lugar: "Real Academia de Bellas Artes de San Fernando", licencia: "Dominio público", archivo: "Francisco_de_Goya_-_Retrato_ecuestre_de_Fernando_VII_-_Google_Art_Project.jpg" },
@@ -82,7 +82,7 @@ window.EJE_CRONOLOGICO = {
     "mayer-trafalgar":  { img: "mayer-trafalgar.jpg", obra: "Combate del navío Bucentaure en Trafalgar", autor: "Auguste Mayer", fecha: "1836", lugar: "", licencia: "Dominio público", archivo: "Trafalgar-Auguste_Mayer.jpg", nota: "La ficha de Commons advierte de que el título original del cuadro no se conoce con seguridad." },
     "lefevre-jose":     { img: "lefevre-jose-bonaparte.jpg", obra: "José Bonaparte, rey de España", autor: "Robert Lefèvre", fecha: "", lugar: "Apsley House (Londres)", licencia: "Dominio público", archivo: "Joseph_Bonaparte,_King_of_Spain,_by_Robert_Lefevre.jpg" },
     "david-napoleon":   { img: "david-napoleon.jpg", obra: "Napoleón en su gabinete de las Tullerías", autor: "Jacques-Louis David", fecha: "1812", lugar: "National Gallery of Art (Washington)", licencia: "Dominio público", archivo: "Jacques-Louis_David_-_The_Emperor_Napoleon_in_His_Study_at_the_Tuileries_-_Google_Art_Project.jpg" },
-    "coromina-bruc":    { img: "coromina-bruc.jpg", obra: "Primera batalla del Bruc (grabado)", autor: "José Coromina Faralt", fecha: "h. 1820", lugar: "", licencia: "Dominio público", archivo: "First_battle_of_El_Bruch_(José_Coromina_Faralt).png" },
+    "bruc":             { img: "anonimo-bruc-1846.jpg", obra: "Segunda defensa del Bruc, 1808 (grabado)", autor: "Autor desconocido", fecha: "1846", lugar: "", licencia: "Dominio público", archivo: "Second_defence_of_Bruch,_1808.jpg" },
     "casado-bailen":    { img: "casado-bailen.jpg", obra: "La rendición de Bailén", autor: "José Casado del Alisal", fecha: "1864", lugar: "Museo del Prado", licencia: "Dominio público", archivo: "La_Rendición_de_Bailén_(Casado_del_Alisal).jpg" },
     "casado-cortes":    { img: "casado-cortes-cadiz.jpg", obra: "El juramento de las Cortes de Cádiz en 1810", autor: "José Casado del Alisal", fecha: "1863", lugar: "Congreso de los Diputados", licencia: "Dominio público", archivo: "El_juramento_de_las_Cortes_de_Cádiz_en_1810.jpg" },
     "lopez-fernando":   { img: "lopez-fernando-vii.jpg", obra: "Fernando VII", autor: "Vicente López Portaña", fecha: "", lugar: "Museo del Prado", licencia: "Dominio público", archivo: "Fernando_VII_-_Vicente_López.jpg" },
@@ -177,7 +177,7 @@ window.EJE_CRONOLOGICO = {
       desde: "1808-06", hasta: "1808-11", fechaTexto: "Entre junio y noviembre de 1808", etapa: "guerra",
       pista: "El somatén catalán derrota a los franceses y corta su avance hacia Aragón.",
       explicacion: "Fue uno de los primeros éxitos de la resistencia, en la primera fase de la guerra (junio-noviembre de 1808). Los apuntes no dan el día exacto.",
-      fuente: "LIB, fases de la guerra; PPT, diap. 4", img: "coromina-bruc"
+      fuente: "LIB, fases de la guerra; PPT, diap. 4", img: "bruc"
     },
     {
       id: "bailen", titulo: "Batalla de Bailén", tipo: "guerra", nivel: "basico",
